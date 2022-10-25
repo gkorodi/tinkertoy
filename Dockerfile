@@ -34,7 +34,8 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 #
 # So, it's important to put this near the end of the Dockerfile, to optimize the 
 # container image build times.
-COPY ./app /code/app
+# originally would be COPY ./app /code/app
+COPY ./app.py /code/app.py
 
 # Set the command to run the uvicorn server.
 # CMD takes a list of strings, each of these strings is what you would type in the 
@@ -44,4 +45,5 @@ COPY ./app /code/app
 # Because the program will be started at /code and inside of it is the directory ./app 
 # with your code, Uvicorn will be able to see and import app from app.main.
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# original, woudl be from the directory: CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
