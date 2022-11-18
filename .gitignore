@@ -128,3 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /virtenv/
+
+/.idea/
+.DS_Store
