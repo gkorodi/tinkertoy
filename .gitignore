@@ -80,7 +80,7 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-
+/.idea/**
 # pyenv
 .python-version
 
@@ -128,6 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /virtenv/
-
 /.idea/
 .DS_Store

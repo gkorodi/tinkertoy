@@ -1,0 +1,7 @@
+services:
+
+  app:
+    build: .
+    image: python
+    ports:
+      - "80:80"
