@@ -1,6 +1,6 @@
 # From the official FastAPI documentation: https://fastapi.tiangolo.com/deployment/docker/
-# Start from the official Python base image.
-FROM python:3.9
+# Start from the official Python base image (without the version number, it will use the latest)
+FROM python
 
 # Set the current working directory to /code.
 # This is where we'll put the requirements.txt file and the app directory.
@@ -45,5 +45,5 @@ COPY ./app.py /code/app.py
 # Because the program will be started at /code and inside of it is the directory ./app 
 # with your code, Uvicorn will be able to see and import app from app.main.
 
-# original, woudl be from the directory: CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# Allow connection from ALL IP addresses, and listen on port 80
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]

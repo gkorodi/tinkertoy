@@ -1,9 +1,30 @@
-"""Simple FastAPI server, for temperaturue conversion."""
-from typing import Union
 from fastapi import FastAPI
 
 app = FastAPI()
 
+
+@app.get("/")
+def read_root():
+    return {"name": "measurement unit converter",
+            "description": "API to convert between various measurement units, and back."}
+
+
+@app.get("/c2f/{c}")
+def read_item(c: int):
+    return {"C": c, "F": c2f(c)}
+
+
+@app.get("/f2c/{f}")
+def read_item(f: int):
+    return {"F": f, "C": f2c(f)}
+
+
+def c2f(c: int):
+    return (c * 9 / 5) + 32
+
+
+def f2c(f: int):
+    return (f - 32) * 5 / 9
 
 @app.get("/")
 async def read_root():
@@ -71,11 +92,13 @@ async def throw_myown_exception():
 
     return "completed"
 
+
 @app.get('/about')
 async def info_about():
     """Provide latest build/version information and some environment variables."""
     # TODO: Create info datastructure
     pass
+
 
 @app.get('/health')
 async def info_about():
