@@ -26,16 +26,11 @@ def c2f(c: int):
 def f2c(f: int):
     return (f - 32) * 5 / 9
 
+
 @app.get("/")
 async def read_root():
     """The index route should always be available, but not always functional"""
     return {"msg": "Hello World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, query_string: Union[str, None] = None):
-    """Demonstrate URL and Query String based parameter handling."""
-    return {"item_id": item_id, "query_string": query_string}
 
 
 @app.get("/celsius/{degree}")
