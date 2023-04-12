@@ -1,4 +1,4 @@
 # tinkertoy
 
-FastAPI based mini application for managing small items (Deployment To Cloud demo)
+This is just a [FastAPI](https://fastapi.tiangolo.com/) based mini application.
 
