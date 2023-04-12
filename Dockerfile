@@ -25,16 +25,16 @@ COPY ./requirements.txt /code/requirements.txt
 # Using the cache in this step will save you a lot of time when building the image 
 # again and again during development, instead of downloading and installing all the 
 # dependencies every time.
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# Copy the ./app directory inside the /code directory.
+# Copy the source file to the container's `/code` directory.
 #
-# As this has all the code which is what changes most frequently the Docker cache 
-# won't be used for this or any following steps easily.
+# As this is the only code file, which changes perhaps most
+# frequently the Docker cache won't be used for this or any
+# following steps.
 #
-# So, it's important to put this near the end of the Dockerfile, to optimize the 
-# container image build times.
-# originally would be COPY ./app /code/app
+# So, it's important to put this near the end of the Dockerfile,
+# to optimize the container image build times.
 COPY ./app.py /code/app.py
 
 # Set the command to run the uvicorn server.
