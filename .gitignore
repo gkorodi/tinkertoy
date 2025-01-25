@@ -130,3 +130,6 @@ dmypy.json
 /virtenv/
 /.idea/
 .DS_Store
+
+# Terraform
+.terraform/
