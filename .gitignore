@@ -133,3 +133,7 @@ dmypy.json
 
 # Terraform
 .terraform/
+terraform_aws/.terraform.lock.hcl
+terraform_aws/terraform.tfstate
+terraform_aws/terraform.tfstate.backup
+terraform_aws/tinkertoy.pln
