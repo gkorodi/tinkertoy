@@ -3,7 +3,6 @@ runtime: python311 # Use the latest supported Python version
 
 build:
   commands:
-    # Install dependencies (e.g., in a requirements.txt file)
     - pip install -r requirements.txt
 
 run:
