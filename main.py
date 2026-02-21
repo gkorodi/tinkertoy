@@ -1,3 +1,4 @@
+import asyncio
 import sqlite3
 
 from pydantic import BaseModel
@@ -43,49 +44,6 @@ def convert_celsius(degree: int):
 def convert_fahrenheit(degree: int):
     """Convert from Fahrenhei to Celsius to t"""
     return {"degree_in_fahrenheit": degree, "degree_in_c": f2c(degree)}
-
-
-@app.get('/exception')
-async def thrown_an_exception():
-    """
-    Generate an exception, by opening a non-existing file, and handle it.
-     Return success all the time.
-     This is just to test backend functionality
-    """
-    my_file = open("my_file.txt", "r", encoding="UTF-8")
-    return "OK"  # This will never be reached, as the file does not exist
-
-    # try:
-    #     my_file = open("my_file.txt", "r", encoding="UTF-8")
-    #     # do some file operations
-    # except FileNotFoundError:
-    #     print("File not found.")
-    # except PermissionError:
-    #     print("Permission denied.")
-    # finally:
-    #     #  the file will be closed no matter what
-    #     my_file.close()
-    #     # Always a good idea to close resources that may or maynot have been left open
-    # return "completed"
-
-
-def divide(a, b):
-    """Demonstrate throwing our own exception """
-    if b == 0:
-        raise ZeroDivisionError("Cannot divide by zero.")
-    return a / b
-
-
-@app.get('/myownexception')
-async def throw_myown_exception():
-    try:
-        # To generate our own thrown exception
-        result = divide(5, 0)
-        print(result)
-    except ZeroDivisionError as e:
-        print(e)
-
-    return "completed"
 
 
 class AboutResponse(BaseModel):
@@ -184,3 +142,42 @@ async def metrics():
     an observability platform, like Prometheus.
     """
     return {'uptime': int(time.time() - start_time)}
+
+
+class Satellite:
+    def __init__(self, altitude: int):
+        self.altitude = altitude
+
+    async def orbit(self):
+        await asyncio.sleep(self.altitude)
+        return self.altitude
+
+
+satellites = [
+    Satellite(altitude=5),
+    Satellite(altitude=10),
+    Satellite(altitude=3),
+    Satellite(altitude=2)
+]
+
+
+@app.get('/a_orbits')
+async def get_a_orbits():
+    """Return a list of altitudes for satellites."""
+    start_time = time.time()
+    all_orbits = await asyncio.gather(
+        *[satellite.orbit() for satellite in satellites]
+    )
+    end_time = time.time()
+    return {"orbits": all_orbits, "measurement_time_seconds": end_time - start_time}
+
+
+@app.get('/s_orbits')
+async def get_s_orbits():
+    """Return a list of altitudes for satellites."""
+    start_time = time.time()
+    all_orbits = []
+    for satellite in satellites:
+        all_orbits.append(await satellite.orbit())
+    end_time = time.time()
+    return {"orbits": all_orbits, "measurement_time_seconds": end_time - start_time}
