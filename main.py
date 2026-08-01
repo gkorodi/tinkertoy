@@ -157,7 +157,8 @@ satellites = [
     Satellite(altitude=5),
     Satellite(altitude=10),
     Satellite(altitude=3),
-    Satellite(altitude=2)
+    Satellite(altitude=2),
+    Satellite(altitude=11)
 ]
 
 
