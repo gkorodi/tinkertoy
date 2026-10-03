@@ -72,7 +72,7 @@ cloud_providers = ["AWS", "GCP", "Azure", "Hetzner", "Other"]
 @app.get('/ui/form', response_class=HTMLResponse)
 async def form_page(request: Request):
     """Return the HTML form."""
-    return templates.TemplateResponse("form.j2", {"request": request, "cloud_providers": cloud_providers})
+    return templates.TemplateResponse(request=request, name="form.j2", context={"cloud_providers": cloud_providers})
 
 
 @app.post('/ui/submit')
@@ -134,7 +134,7 @@ async def get_cloud_table(request: Request):
 
     # entries = [dict(row) for row in rows]
     conn.close()
-    return templates.TemplateResponse("table.j2", {"request": request, 'entries':  entries})
+    return templates.TemplateResponse(request=request, name="table.j2", context={'entries': entries})
 
 
 @app.get('/metrics')
