@@ -66,10 +66,13 @@ async def health_check():
     return {'status': 'healthy'}
 
 
+cloud_providers = ["AWS", "GCP", "Azure", "Hetzner", "Other"]
+
+
 @app.get('/ui/form', response_class=HTMLResponse)
 async def form_page(request: Request):
     """Return the HTML form."""
-    return templates.TemplateResponse("form.j2", {"request": request})
+    return templates.TemplateResponse("form.j2", {"request": request, "cloud_providers": cloud_providers})
 
 
 @app.post('/ui/submit')

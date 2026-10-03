@@ -17,10 +17,9 @@
         <label for="cloud">Favorite Cloud Provider:</label>
         <select id="cloud" name="cloud" required>
             <option value="">Select one</option>
-            <option value="AWS">AWS</option>
-            <option value="Azure">Azure</option>
-            <option value="GCP">Google Cloud Platform</option>
-            <option value="Other">Other</option>
+            {% for cloud_provider in cloud_providers %}
+            <option value="{{ cloud_provider }}">{{ cloud_provider }}</option>
+            {% endfor %}
         </select><br><br>
 
         <div id="otherField" style="display:none;">

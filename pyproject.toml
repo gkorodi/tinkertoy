@@ -12,3 +12,7 @@ dependencies = [
     "pysqlite3>=0.6.0",
     "uvicorn>=0.41.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
